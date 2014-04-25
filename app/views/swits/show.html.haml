@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Body:
+  = @swit.body
+%p
+  %b Author:
+  = @swit.author
+%p
+  %b Likes:
+  = @swit.likes
+%p
+  %b Unlike:
+  = @swit.unlike
+
+= link_to 'Edit', edit_swit_path(@swit)
+\|
+= link_to 'Back', swits_path

@@ -1,0 +1,28 @@
+%h1 Listing swits
+
+%table
+  %tr
+    %th Body
+    %th Author
+    %th Likes
+    %th Unlike
+    %th
+    %th
+    %th
+    %th
+    %th
+
+  - @swits.each do |swit|
+    %tr
+      %td= swit.body
+      %td= swit.author
+      %td= swit.likes
+      %td= swit.unlike
+      %td= link_to 'Swit', swit
+      %td= link_to 'Edit', edit_swit_path(swit)
+      %td= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to "Approve Period", approve_path(:period => @approval_period)
+
+%br
+
+= link_to 'New Swit', new_swit_path
