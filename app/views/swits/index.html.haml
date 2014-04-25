@@ -21,7 +21,8 @@
       %td= link_to 'Swit', swit
       %td= link_to 'Edit', edit_swit_path(swit)
       %td= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      %td= link_to "Approve Period", approve_path(:period => @approval_period)
+      //%td= link_to "Like ++", Resource.increment_counter("likes", @swit.id)
+      //%td= link_to "Approve Period", :method => :approve, :id => @approval_period
 
 %br
 

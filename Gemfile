@@ -51,3 +51,4 @@ gem 'foundation-rails'
 
 # Use devise
 gem 'devise'
+
