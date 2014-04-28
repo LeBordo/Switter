@@ -1,10 +1,12 @@
 class SwitsController < ApplicationController
   before_action :set_swit, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  
   # GET /swits
   # GET /swits.json
   def index
     @swits = Swit.all
+    @swit = Swit.new
   end
 
   # GET /swits/1
@@ -25,11 +27,13 @@ class SwitsController < ApplicationController
   # POST /swits.json
   def create
     @swit = Swit.new(swit_params)
+    @swit_fin = swits_path
 
     respond_to do |format|
       if @swit.save
-        format.html { redirect_to @swit, notice: 'Swit was successfully created.' }
+        format.html { redirect_to swits_path, notice: 'Swit was successfully created.' }
         format.json { render action: 'show', status: :created, location: @swit }
+
       else
         format.html { render action: 'new' }
         format.json { render json: @swit.errors, status: :unprocessable_entity }
