@@ -4,6 +4,7 @@ Switter::Application.routes.draw do
   resources :swits do
     resources :comments
     resources :sweets
+    resources :sours
 
   end
   

@@ -10,4 +10,6 @@
   .field
     = f.hidden_field :username, value: current_user.email
   .actions
-    = f.submit 'Sweetify'
+    /= button_tag(type: 'submit', class: "fi-check") do
+    /  %span.glyphicon.glyphicon-thumbs-up
+    = f.submit "Add Sweet"
