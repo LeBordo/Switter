@@ -1,31 +1,31 @@
-%h1 Listing swits
+%h1 Switter
+
+%div#left Logged in as #{current_user.email}
+%br
+%div#left= link_to "Sign out", destroy_user_session_path, :method => :delete
+%br
+%br
 
 = render 'form'
 
-%table
-  %tr
-    %th Body
-    %th Author
-    %th Likes
-    %th Unlike
-    %th at
-    %th
-    %th
-    %th
-    %th
 
-  - @swits.each do |swit|
-    %tr
-      %td= swit.body
-      %td= swit.author
-      %td= swit.likes
-      %td= swit.unlike
-      %td= link_to 'Swit', swit
-      %td= link_to 'Edit', edit_swit_path(swit)
-      %td= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      //%td= link_to "Like ++", Resource.increment_counter("likes", @swit.id)
-      //%td= link_to "Approve Period", :method => :approve, :id => @approval_period
+- @swits.each do |swit|
+  %br
+  %br
 
+  %b#div #{swit.body}
+  %div by: #{swit.author}
+  %div id =  #{swit.id}
+  %div Comments
+
+  %div= render swit.comments
+
+  - @comment = Comment.new
+  - @swit= swit
+  - @sweet = Sweet.new
+
+  %div= render 'comments/form', :swit => @swit
+  %div= pluralize(swit.sweets.count.to_s, "sweet")
+  %div= render 'sweets/form', :swit => @swit
+  %div= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
-
-= link_to 'New Swit', new_swit_path

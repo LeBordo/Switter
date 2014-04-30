@@ -1,6 +1,14 @@
 Switter::Application.routes.draw do
+
+
+  resources :swits do
+    resources :comments
+    resources :sweets
+
+  end
+  
   devise_for :users
-  resources :swits
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -55,4 +63,5 @@ Switter::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  #get '/swits/:id/addlike(.:format)' => 'swits#addlike', as: :addlike
 end

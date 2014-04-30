@@ -1,12 +1,14 @@
 class SwitsController < ApplicationController
   before_action :set_swit, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
-  
+
   # GET /swits
   # GET /swits.json
   def index
     @swits = Swit.all
     @swit = Swit.new
+    @comment = Comment.new
+
   end
 
   # GET /swits/1
@@ -31,7 +33,7 @@ class SwitsController < ApplicationController
 
     respond_to do |format|
       if @swit.save
-        format.html { redirect_to swits_path, notice: 'Swit was successfully created.' }
+        format.html { redirect_to swits_path }
         format.json { render action: 'show', status: :created, location: @swit }
 
       else
@@ -46,13 +48,17 @@ class SwitsController < ApplicationController
   def update
     respond_to do |format|
       if @swit.update(swit_params)
-        format.html { redirect_to @swit, notice: 'Swit was successfully updated.' }
+        format.html { redirect_to @swit }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @swit.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def addlike
+    
   end
 
   # DELETE /swits/1

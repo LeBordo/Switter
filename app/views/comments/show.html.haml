@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Swit:
+  = @comment.swit_id
+%p
+  %b Body:
+  = @comment.body
+%p
+  %b Author:
+  = @comment.author
+
+= link_to 'Edit', edit_swit_comment_path(@swit, @comment)
+\|
+= link_to 'Back', swit_comments_path(@swit)

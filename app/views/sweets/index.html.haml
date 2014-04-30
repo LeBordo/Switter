@@ -1,0 +1,19 @@
+%h1 Listing sweets
+
+%table
+  %tr
+    %th Username
+    %th
+    %th
+    %th
+
+  - @sweets.each do |sweet|
+    %tr
+      %td= sweet.username
+      %td= link_to 'Show', swit_sweet_path(@swit, sweet)
+      %td= link_to 'Edit', edit_swit_sweet_path(@swit, sweet)
+      %td= link_to 'Destroy', [@swit, sweet], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sweet', new_swit_sweet_path(@swit)
