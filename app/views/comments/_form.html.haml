@@ -9,9 +9,8 @@
   .field
     = f.hidden_field :swit_id, value: swit.id
   .field
-    = f.label :body
+    = f.label :"reply:"
     = f.text_field :body
   .field
     = f.hidden_field :author, value: current_user.email
-  .actions
-    = f.submit 'Save'
+

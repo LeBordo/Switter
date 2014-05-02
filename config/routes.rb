@@ -1,14 +1,21 @@
 Switter::Application.routes.draw do
 
+  resources :doortags do
+    collection do
+      get :related
+    end
+  end
 
   resources :swits do
     resources :comments
     resources :sweets
     resources :sours
-
+    resources :doortags
   end
   
   devise_for :users
+
+  # get '/doortags/related(.:format) ' => 'doortags#related ', as: :view_re
 
 
   # The priority is based upon order of creation: first created -> highest priority.

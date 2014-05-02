@@ -6,15 +6,20 @@
         - @swit.errors.full_messages.each do |msg|
           %li= msg
 
+  .large-9.columns
+    .field
+      = f.text_area :body, id: "txt", maxlength: 140
+    .field
+      = f.hidden_field :author, value: current_user.email
+    .field
+      = f.hidden_field :likes, value: 0
+    .field
+      = f.hidden_field :unlike, value: 0
+  .large-1.columns
+    %h5.strong.span#count 140
+    %div left
+  .large-2.columns
+    .actions#left
+      = f.submit 'Submit', class: 'button small'
 
-  .field
-    = f.label :"New Swit"
-    = f.text_field :body
-  .field
-    = f.hidden_field :author, value: current_user.email
-  .field
-    = f.hidden_field :likes, value: 0
-  .field
-    = f.hidden_field :unlike, value: 0
-  .actions
-    = f.submit 'Submit', class: 'button small'
+  

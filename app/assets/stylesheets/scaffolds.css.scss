@@ -14,8 +14,33 @@ body {
 }
 
 #sign {
-    margin: auto;
+    margin: 0 auto;
     width: 25%;
+}
+
+#main {
+  overflow: hidden;
+}
+
+#center {
+  margin: auto;
+  float: center;
+}
+
+#scroll {
+  max-height: 100vh - 18vh;
+  // max-height: calc(100% - 100px); /* IE9+ and future browsers */
+  // max-height: -moz-calc(100% - 100px); /* Firefox */
+  // max-height: -webkit-calc(100% - 100px); /* Chrome, Safari */
+  overflow-y: scroll;
+  overflow-x: hidden;   
+}
+
+#break {
+  word-wrap: break-word;      /* IE 5.5-7 */
+  white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+  white-space: pre-wrap;      /* current browsers */
+  // source: http://stackoverflow.com/questions/5852700/auto-break-line-in-html
 }
 
 #left{

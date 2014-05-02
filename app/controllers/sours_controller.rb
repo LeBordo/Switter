@@ -25,15 +25,21 @@ class SoursController < ApplicationController
   # POST /sours
   # POST /sours.json
   def create
-    @sour = @swit.sours.new(sour_params)
+    @trueSour = Sour.where(swit_id: params[:swit_id], username: current_user.email).first
 
-    respond_to do |format|
-      if @sour.save
-        format.html { redirect_to swits_path }
-        format.json { render action: 'show', status: :created, location: @sour }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @sour.errors, status: :unprocessable_entity }
+    if (@trueSour!=nil)
+      redirect_to swits_path
+    else
+      @sour = @swit.sours.new(sour_params)
+
+      respond_to do |format|
+        if @sour.save
+          format.html { redirect_to swits_path }
+          format.json { render action: 'show', status: :created, location: @sour }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @sour.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -5,7 +5,7 @@ class SwitsController < ApplicationController
   # GET /swits
   # GET /swits.json
   def index
-    @swits = Swit.all
+    @swits = Swit.all(:order => "created_at DESC")
     @swit = Swit.new
     @comment = Comment.new
 
@@ -30,9 +30,19 @@ class SwitsController < ApplicationController
   def create
     @swit = Swit.new(swit_params)
     @swit_fin = swits_path
+    @body = @swit.body
 
     respond_to do |format|
       if @swit.save
+        @tags = @body.scan(/\{[^}]*\}/)
+          # render :text => @tags
+
+        @tags.each do |doortag|
+          @doortag = Doortag.new(swit_id: @swit.id, tag: doortag)
+          @doortag.save
+          # raise Hash[doortag.attributes.select {|_,v| v.is_a? Array}].inspect
+        end
+
         format.html { redirect_to swits_path }
         format.json { render action: 'show', status: :created, location: @swit }
 
@@ -64,6 +74,9 @@ class SwitsController < ApplicationController
   # DELETE /swits/1
   # DELETE /swits/1.json
   def destroy
+    # @tag = Doortag.where(swit_id: @swit.id).first
+    # @tag.destroy()
+
     @swit.destroy
     respond_to do |format|
       format.html { redirect_to swits_url }

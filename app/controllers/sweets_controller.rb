@@ -9,9 +9,9 @@ class SweetsController < ApplicationController
 
   # GET /sweets/1
   # GET /sweets/1.json
-  def show
-    @swit.sweets.find(params[:id])
-  end
+  # def show
+    # @swit.sweets.find(params[:id])
+  # end
 
   # GET /sweets/new
   def new
@@ -25,31 +25,22 @@ class SweetsController < ApplicationController
   # POST /sweets
   # POST /sweets.json
   def create
-    @sweet = @swit.sweets.new(sweet_params)
+    @trueSweet = Sweet.where(swit_id: params[:swit_id], username: current_user.email).first
+    
+    if(@trueSweet!=nil)
+      redirect_to swits_path
+    else
+      @sweet = @swit.sweets.new(sweet_params)
 
-    respond_to do |format|
-      if @sweet.save
-        format.html { redirect_to swits_path }
-        format.json { render action: 'show', status: :created, location: @sweet }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @sweet.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /sweets/1
-  # PATCH/PUT /sweets/1.json
-  def update
-    @sweet = @swit.sweets.find(params[:id])
-    respond_to do |format|
-      if @sweet.update(sweet_params)
-        format.html { redirect_to [@swit, @sweet], notice: 'Sweet was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @sweet.errors, status: :unprocessable_entity }
-      end
+      respond_to do |format|
+        if @sweet.save
+          format.html { redirect_to swits_path }
+          format.json { render action: 'show', status: :created, location: @sweet }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @sweet.errors, status: :unprocessable_entity }
+        end
+      end  
     end
   end
 

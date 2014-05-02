@@ -1,0 +1,16 @@
+= form_for @doortag do |f|
+  - if @doortag.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@doortag.errors.count, "error")} prohibited this doortag from being saved:"
+      %ul
+        - @doortag.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :swit_id
+    = f.number_field :swit_id
+  .field
+    = f.label :tag
+    = f.text_field :tag
+  .actions
+    = f.submit 'Save'

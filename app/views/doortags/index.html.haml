@@ -1,0 +1,21 @@
+%h1 Listing doortags
+
+%table
+  %tr
+    %th Swit
+    %th Tag
+    %th
+    %th
+    %th
+
+  - @doortags.each do |doortag|
+    %tr
+      %td= doortag.swit_id
+      %td= doortag.tag
+      %td= link_to 'Show', doortag
+      %td= link_to 'Edit', edit_doortag_path(doortag)
+      %td= link_to 'Destroy', doortag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Doortag', new_doortag_path

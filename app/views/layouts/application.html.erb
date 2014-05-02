@@ -8,11 +8,39 @@
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
+
     <%= csrf_meta_tags %>
+
+    <script>
+      function go() {
+        var txt=document.getElementById("txt");
+        txt.onkeydown = countTxt;
+        txt.onkeyup = countTxt1;
+      }
+      function countTxt(){
+        var txt = document.getElementById("txt");
+        var count = document.getElementById("count");
+        count.innerHTML = 140-txt.value.length;
+      }
+      function countTxt1(){
+        var txt = document.getElementById("txt");
+        var count = document.getElementById("count");
+        count.innerHTML = 140-txt.value.length;
+      }
+    </script>
+
   </head>
 
-  <body>
+  <body onload="go()">
     <%= yield %>
     <%= javascript_include_tag "application" %>
+    
+    <!-- <div style="position: fixed; z-index: 1000; top: 0; right: 0; width:80px ; height: 80px;">
+    <a style="display: block;">
+      <img src="http://placehold.it/80x80&text=[img]" style="display: block;"/>
+    </a>
+  </div> -->
+
+
   </body>
 </html>
