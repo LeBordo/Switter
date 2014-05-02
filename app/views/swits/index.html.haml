@@ -1,4 +1,3 @@
-/ Header and Nav
 .row
   .panel.large-12.columns
     .large-3.columns
@@ -6,119 +5,118 @@
     / .large-2.columns
     .large-9.columns
 
-      / %img#center#div#left{src: "http://placehold.it/80x80&text=[img]"}/
-      /%h4#left #{current_user.email}
-      /%div#div#left= link_to "Sign out", destroy_user_session_path, :method => :delete
-/ End Header and Nav
-.row
-  / Nav Sidebar
-  / This is source ordered to be pulled to the left on larger screens
-  .large-3.columns
-    .panel
-      %a{href: "#"}
-        %img{src: "http://placehold.it/300x240&text=[img]"}/
-      %h5
-        %strong#center #{current_user.email}
-      .section-container.vertical-nav{"data-options" => "deep_linking: false; one_up: true", "data-section" => ""}
-        %section.section
-          %h5.title
-            %div= link_to "Sign out", destroy_user_session_path, :method => :delete
-        / %section.section
-        /   %h5.title
-        /     %a{href: "#"} Section 2
-        / %section.section
-        /   %h5.title
-        /     %a{href: "#"} Section 3
-        / %section.section
-        /   %h5.title
-        /     %a{href: "#"} Section 4
-        / %section.section
-        /   %h5.title
-        /     %a{href: "#"} Section 5
-        / %section.section
-        /   %h5.title
-        /     %a{href: "#"} Section 6
-  / Main Feed
-  / This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens
-  .large-9.columns
-    = render 'form'
+  .panel.large-12.columns#cover  
+    / Header and Nav
+    
+    .row
+      / Nav Sidebar
+      / This is source ordered to be pulled to the left on larger screens
+      .large-3.columns
+        .panel
+          %a{href: "#"}
+            %img{src: "http://placehold.it/300x240&text=[img]"}/
+          %h5
+            %strong#center #{current_user.email}
+          .section-container.vertical-nav{"data-options" => "deep_linking: false; one_up: true", "data-section" => ""}
+            %section.section
+              %h5.title
+                %div= link_to "Sign out", destroy_user_session_path, :method => :delete
+            / %section.section
+            /   %h5.title
+            /     %a{href: "#"} Section 2
+            / %section.section
+            /   %h5.title
+            /     %a{href: "#"} Section 3
+            / %section.section
+            /   %h5.title
+            /     %a{href: "#"} Section 4
+            / %section.section
+            /   %h5.title
+            /     %a{href: "#"} Section 5
+            / %section.section
+            /   %h5.title
+            /     %a{href: "#"} Section 6
+      / Main Feed
+      / This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens
+      .large-9.columns
+        = render 'form'
 
-    %hr
-    .large-12.columns#scroll
-      - @swits.each do |swit|
-        - @comment = Comment.new
-        - @swit= swit
-        - @sweet = Sweet.new
-        - @sour = Sour.new
-        - text = swit.body
-
-
-        -swit.body.scan(/{(.*?)}/) do |f|
-          -text = text.gsub('{' + f[0] + '}', "<a data-method=\"get\" href=\"\/doortags\/related\?tag=" + f[0] + "\">{" + f[0] + "}</a>").html_safe
-
-        / Feed Entry
-        .row
-          .large-2.columns.small-3
-            %img{src: "http://placehold.it/80x80&text=[img]"}/
-          .large-10.columns
-            %p
-              %strong #{swit.author} said: 
-              %p#break #{text}
-              - if swit.author == current_user.email
-                %strong#left= link_to 'Delete', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
-              %br
-             
-            %ul.inline-list
-              /%li
-              /  %i{class: "fi-check"}
-              /%li
-              /  %i{class: "fi-x"}
-              %li
-                = render 'sweets/form', :swit => @swit
-              %li
-                = render 'sours/form', :swit => @swit
-              %div#left= pluralize(swit.sours.count.to_s, "sours")
-              %div#left=  "&nbsp||&nbsp".html_safe
-              %div#left= pluralize(swit.sweets.count.to_s, "sweet")
-
-            %h6= pluralize(swit.comments.count.to_s, "Comment")
-            - swit.comments.each do |comment|
-              .row
-                %p
-                  .large-2.columns.small-3
-                    %img{src: "http://placehold.it/50x50&text=[img]"}/
-                  .large-10.columns
-                    %p #{comment.body}
-                  / %strong#left= link_to 'Delete', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
-            %div= render 'comments/form', :swit => @swit
-        / End Feed Entry
         %hr
-/   / Right Sidebar
-/   / On small devices this column is hidden
-/   %aside.large-3.columns.hide-for-small
-/     %p
-/       %img{src: "http://placehold.it/300x440&text=[ad]"}/
-/     %p
-/       %img{src: "http://placehold.it/300x440&text=[ad]"}/
-/ / Footer
-/ %footer.row
-/   .large-12.columns
-/     %hr/
-/     .row
-/       .large-5.columns
-/         %p © Copyright no one at all. Go to town.
-/       .large-7.columns
-/         %ul.inline-list.right
-/           %li
-/             %a{href: "#"} Section 1
-/           %li
-/             %a{href: "#"} Section 2
-/           %li
-/             %a{href: "#"} Section 3
-/           %li
-/             %a{href: "#"} Section 4
-/           %li
-/             %a{href: "#"} Section 5
-/           %li
-/             %a{href: "#"} Section 6
-/ template source: http://foundation.zurb.com/templates/feed.html
+        .large-12.columns#scroll
+          - @swits.each do |swit|
+            - @comment = Comment.new
+            - @swit= swit
+            - @sweet = Sweet.new
+            - @sour = Sour.new
+            - text = swit.body
+
+
+            -swit.body.scan(/{(.*?)}/) do |f|
+              -text = text.gsub('{' + f[0] + '}', "<a data-method=\"get\" href=\"\/doortags\/related\?tag=" + f[0] + "\">{" + f[0] + "}</a>").html_safe
+
+            / Feed Entry
+            .row.radius#kulay
+              .large-2.columns.small-3
+                %img{src: "http://placehold.it/80x80&text=[img]"}/
+              .large-10.columns
+                %p
+                  %strong #{swit.author} said: 
+                  %p#break #{text}
+                  - if swit.author == current_user.email
+                    %strong#left= link_to 'Delete', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                  %br
+                 
+                %ul.inline-list
+                  /%li
+                  /  %i{class: "fi-check"}
+                  /%li
+                  /  %i{class: "fi-x"}
+                  %li
+                    = render 'sweets/form', :swit => @swit
+                  %li
+                    = render 'sours/form', :swit => @swit
+                  %div#left= pluralize(swit.sours.count.to_s, "sours")
+                  %div#left=  "&nbsp||&nbsp".html_safe
+                  %div#left= pluralize(swit.sweets.count.to_s, "sweet")
+
+                %h6= pluralize(swit.comments.count.to_s, "Comment")
+                - swit.comments.each do |comment|
+                  .row
+                    %p
+                      .large-2.columns.small-3
+                        %img{src: "http://placehold.it/50x50&text=[img]"}/
+                      .large-10.columns
+                        %p #{comment.body}
+                      / %strong#left= link_to 'Delete', comment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                %div= render 'comments/form', :swit => @swit
+            / End Feed Entry
+            %hr
+    /   / Right Sidebar
+    /   / On small devices this column is hidden
+    /   %aside.large-3.columns.hide-for-small
+    /     %p
+    /       %img{src: "http://placehold.it/300x440&text=[ad]"}/
+    /     %p
+    /       %img{src: "http://placehold.it/300x440&text=[ad]"}/
+    / / Footer
+    / %footer.row
+    /   .large-12.columns
+    /     %hr/
+    /     .row
+    /       .large-5.columns
+    /         %p © Copyright no one at all. Go to town.
+    /       .large-7.columns
+    /         %ul.inline-list.right
+    /           %li
+    /             %a{href: "#"} Section 1
+    /           %li
+    /             %a{href: "#"} Section 2
+    /           %li
+    /             %a{href: "#"} Section 3
+    /           %li
+    /             %a{href: "#"} Section 4
+    /           %li
+    /             %a{href: "#"} Section 5
+    /           %li
+    /             %a{href: "#"} Section 6
+    / template source: http://foundation.zurb.com/templates/feed.html

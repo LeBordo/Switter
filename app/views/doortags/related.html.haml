@@ -2,10 +2,13 @@ Related Tags
 - @doortags.each do |doortag|
   %br
   %br
-  asdla
 
   %b#div tag #{doortag.tag}
   - @swits.where(id: doortag.swit_id).first.body
-  %div id: #{doortag.swit_id}
+  %div Swit ID: #{doortag.swit_id}
+
+  - @content = Swit.where(id: doortag.swit_id).first
+  %div id: #{@content.body}
+
 
 %br

@@ -54,4 +54,3 @@ gem 'devise'
 
 # Use glyphicons from Foundation
 gem 'foundation-icons-sass-rails'
-
